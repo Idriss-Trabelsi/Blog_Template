@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Acceuil</a></li>
+                <li><a href="produit.html">Produits</a></li>
+                <li><a href="apropos.html">A propos</a></li>
+                <li><a href="panier.html">Panier</a></li>      
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="contact">
+        <h2>Bienvenue sur notre boutique en ligne sportshop</h2>
+        <p><h2> Contactez-nous </h2></p>
+    <div class="container">
+        <div class="contact-info">
+            <h3>Nos informations</h3>
+            <p><strong>Adresse :</strong> 7000 Bizerte centre ville , Bizerte, Tunisie</p>
+            <p><strong>Téléphone :</strong> +216 96 444 555</p>
+            <p><strong>Email :</strong> SportShop@boutiqueenligne.com</p>
+        </div>
+        <div class="contact-form">
+            <h3>Envoyez-nous un message</h3>
+            <form action="votre_script_de_traitement.php" method="post">
+                <p><label for="name"><strong>Votre nom :</strong></label>
+                <input type="text" id="name" name="name" required></p>
+
+                <p><label for="email"><strong>Votre email :</strong></label>
+                <input type="email" id="email" name="email" required></p>
+
+                <p><label for="message"><strong>Votre message :</strong></label>
+                <textarea id="message" name="message" rows="2" required></textarea></p>
+
+                <button type="submit">Envoyer le message</button>
+            </form>
+        </div>
+    </div>
+    </section>
+</body>
+</html>

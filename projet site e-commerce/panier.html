@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Acceuil</a></li>
+                <li><a href="produit.html">Produits</a></li>
+                <li><a href="apropos.html">A propos</a></li>
+                <li><a href="panier.html">Panier</a></li>      
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="panier">
+        <h2>Votre Panier</h2>
+        <div id="panier-items">
+            <p>Votre panier est vide</p>
+        </div>
+        <div id="total-panier">
+            <p><strong>Total : </strong>0 TND</p>
+            <button id="valider-panier">Valider le panier</button>
+        </div>
+    </section>
+    <script>
+        function mettreAJourPanier() {
+            const panier = JSON.parse(localStorage.getItem('panier')) || [];
+            const panierItemsDiv = document.getElementById('panier-items');
+            const totalDiv = document.getElementById('total-panier');
+            panierItemsDiv.innerHTML = '';
+            let total = 0;
+
+            if (panier.length === 0) {
+                panierItemsDiv.innerHTML = '<p>Votre panier est vide</p>';
+                totalDiv.querySelector('p').innerHTML = '<strong>Total : </strong>0 TND';
+                return;
+            }
+
+            panier.forEach((item, index) => {
+                const divItem = document.createElement('div');
+                divItem.classList.add('panier-item');
+                divItem.innerHTML = `
+                    <p><strong>${item.nom}</strong></p>
+                    <p>Prix : ${item.prix} TND</p>
+                    <p>Taille : ${item.taille}</p>
+                    <button class="remove-item" data-index="${index}">Supprimer</button>
+                `;
+                panierItemsDiv.appendChild(divItem);
+                total += parseFloat(item.prix);
+            });
+
+            totalDiv.querySelector('p').innerHTML = `<strong>Total : </strong>${total.toFixed(2)} TND`;
+
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.target.getAttribute('data-index');
+                    panier.splice(index, 1); 
+                    localStorage.setItem('panier', JSON.stringify(panier)); 
+                    mettreAJourPanier(); 
+                });
+            });
+        }
+
+        mettreAJourPanier();
+
+        document.getElementById('valider-panier').addEventListener('click', () => {
+            const panier = JSON.parse(localStorage.getItem('panier')) || [];
+            if (panier.length === 0) {
+                alert('Votre panier est vide. Ajoutez des articles pour continuer.');
+            } else {
+                alert('Panier validé. Merci pour votre achat !');
+                localStorage.removeItem('panier'); 
+                mettreAJourPanier();
+            }
+        });
+    </script>
+          
+</body>
+</html>
